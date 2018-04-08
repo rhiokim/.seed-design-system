@@ -1,5 +1,12 @@
-const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const nib = require('nib')
+
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].css',
+  disable: process.env.NODE_ENV === 'development'
+})
 
 module.exports = {
   entry: {
@@ -24,9 +31,29 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.sass$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'stylus-loader',
+            options: {
+              use: [nib()]
+            }
+          }
+        ]
       }
     ]
   },
-  plugins: [new UglifyJsPlugin()],
+  plugins: [extractSass, new UglifyJsPlugin()],
   externals: ['react']
 }
