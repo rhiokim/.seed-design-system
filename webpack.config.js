@@ -3,8 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path')
 const nib = require('nib')
 
-const extractSass = new ExtractTextPlugin({
-  filename: '[name].css',
+const extractStyle = new ExtractTextPlugin({
+  filename: 'bundle.min.css',
   disable: process.env.NODE_ENV === 'development'
 })
 
@@ -16,7 +16,8 @@ module.exports = {
     Image: './src/Image/Image.js',
     Badge: './src/Badge/Badge.js',
     Input: './src/Input/Input.js',
-    Modal: './src/Modal/Modal.js'
+    Modal: './src/Modal/Modal.js',
+    assets: './src/assets/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -36,24 +37,49 @@ module.exports = {
         test: /\.sass$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                url: false,
+                minimize: true,
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
+          ]
         })
       },
       {
         test: /\.styl$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'stylus-loader',
-            options: {
-              use: [nib()]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                url: false,
+                minimize: true,
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'stylus-loader',
+              options: {
+                use: [nib()],
+                import: ['~nib/lib/nib/index.styl']
+              }
             }
-          }
-        ]
+          ]
+        })
       }
     ]
   },
-  plugins: [extractSass, new UglifyJsPlugin()],
+  plugins: [extractStyle, new UglifyJsPlugin()],
   externals: ['react']
 }

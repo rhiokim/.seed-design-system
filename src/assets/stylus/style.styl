@@ -1,0 +1,14 @@
+@import 'nib/gradients'
+@import 'nib/overflow'
+@import 'nib/normalize'
+
+body
+  background linear-gradient(top, white, black)
+
+.foo
+  &__bar
+    &_baz
+      width: 10px
+
+      ^[-1]:hover &
+        width: 20px
