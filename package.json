@@ -1,7 +1,7 @@
 {
-  "name": "components",
+  "name": "seed-design-system",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is seed project which is design system for large scale web project",
   "main": "index.js",
   "keywords": [],
   "author": "rhio.kim@gmail.com",
