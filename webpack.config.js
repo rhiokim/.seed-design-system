@@ -11,11 +11,13 @@ const extractStyle = new ExtractTextPlugin({
 module.exports = {
   entry: {
     Button: './src/Button/Button.js',
+    Container: './src/Container/Container.js',
     Panel: './src/Card/Panel.js',
     Card: './src/Card/Card.js',
     Image: './src/Image/Image.js',
     Badge: './src/Badge/Badge.js',
     Input: './src/Input/Input.js',
+    Checkbox: './src/Chceckbox/Checkbox.js',
     Modal: './src/Modal/Modal.js',
     assets: './src/assets/index.js'
   },
