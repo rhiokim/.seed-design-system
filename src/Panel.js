@@ -11,7 +11,9 @@ const style = {
   padding: '5px'
 }
 
-export default ({ children }: Props) => <div style={style}>
-  <h2>Panel header</h2>
-  {children}
-</div>
+export default ({ children }: Props) => (
+  <div style={style}>
+    <h2>Panel header</h2>
+    {children}
+  </div>
+)

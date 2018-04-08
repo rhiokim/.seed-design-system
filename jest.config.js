@@ -1,3 +1,4 @@
 module.exports = {
-  verbose: true
+  setupFiles: ['<rootDir>/jest.setup.js'],
+  testPathIgnorePatterns: ['<rootDir>/lib/', '<rootDir>/node_modules/']
 }
