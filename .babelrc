@@ -1,22 +1,6 @@
 {
-  "env": {
-    "development": {
-      "presets": ["env", "react"],
-      "plugins": [
-        "transform-flow-strip-types"
-      ]
-    },
-    "production": {
-      "presets": ["env", "react"],
-      "plugins": [
-        "transform-flow-strip-types"
-      ]
-    },
-    "test": {
-      "presets": ["env", "react"],
-      "plugins": [
-        "transform-flow-strip-types"
-      ]
-    }
-  }
+  "presets": ["env", "react"],
+  "plugins": [
+    "transform-flow-strip-types"
+  ]
 }
